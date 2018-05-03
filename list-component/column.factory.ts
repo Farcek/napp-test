@@ -1,6 +1,6 @@
 import { PropertyMeta } from "../metadata";
-import { IColumnRenderer } from "./column.interface";
-import { Columnformatmeta, $columnformatmetaKey, $columnmetaKey, Columnmeta, Columntype } from "../list-common";
+
+import { Columnformatmeta, $columnformatmetaKey, $columnmetaKey, Columnmeta, Columntype, IColumnRenderer } from "../list-common";
 import { Classtype } from "../common";
 import { StringColumnRenderer } from "./column/string";
 import { ActionColumnRenderer } from "./column/action";
@@ -26,7 +26,7 @@ function buildFormater(propery: PropertyMeta) {
     return (value: any, state: any, row: any) => value;
 }
 
-function columnclassFromColumntype(coltype: Columntype): Classtype | null {
+function columnclassFromColumntype(coltype: Columntype): Classtype {
 
     if (coltype === Columntype.string) {
         return StringColumnRenderer;
@@ -36,117 +36,64 @@ function columnclassFromColumntype(coltype: Columntype): Classtype | null {
         return LinkColumnRenderer;
     }
 
-    return null;
+    return StringColumnRenderer;
 }
 
-function columnclassFromClasstype(propery: PropertyMeta): Classtype | null {
-
-    if (propery.reftype === String) {
-        return StringColumnRenderer;
-    }
-
-    return null;
-}
-function factoryClass(propery: PropertyMeta, $col: Columnmeta | null) {
-    let classtype: Classtype | null = null;
-    let options: any;
+function factoryClass($col: Columnmeta | null): Classtype {
 
     if ($col) {
-
         if ($col.columnclass) {
-            classtype = $col.columnclass
+            return $col.columnclass
         } else if ($col.columntype) {
-            classtype = columnclassFromColumntype($col.columntype);
+            return columnclassFromColumntype($col.columntype)
         }
-
-        options = $col.options || {}
     }
-
-    if (classtype) {
-        return { classtype, options }
-    }
-
-
-    classtype = columnclassFromClasstype(propery);
-    options = $col && $col.options || {}
-    if (classtype) {
-        return { classtype, options }
-    }
-
-    classtype = StringColumnRenderer
-    return { classtype, options }
+    return StringColumnRenderer
 }
 
+function factoryMeta(propery: PropertyMeta) {
+    let $col = propery.getMeta<Columnmeta>($columnmetaKey)
+    if ($col) {
+        return $col;
+    }
+
+    if (propery.reftype === String) {
+        return {
+            columntype: Columntype.string
+        };
+    }
+
+    if (propery.reftype === Number) {
+        return {
+            columntype: Columntype.float
+        };
+    }
+
+    if (propery.reftype === Date) {
+        return {
+            columntype: Columntype.date
+        };
+    }
+
+    if (propery.reftype === Boolean) {
+        return {
+            columntype: Columntype.boolean
+        };
+    }
+
+    return null;
+}
 export function columnFactory(propery: PropertyMeta): IColumnRenderer {
     let formater = buildFormater(propery);
 
-    let $col: Columnmeta | null = propery.getMeta($columnmetaKey)
+    let $col = factoryMeta(propery);
 
 
-    let { classtype, options } = factoryClass(propery, $col);
+    let Classtype = factoryClass($col);
 
-    return new classtype(propery, options);
+    let renderer: IColumnRenderer = new Classtype();
+    renderer.propery = propery;
+    renderer.options = $col && $col.options;
 
+    return renderer;
 }
-
-
-// private buildColumnRender(listMeta: NappListMetadata, col: PNappTableColumn<any>, $col: IColumn, p: string) {
-
-
-    //     let formater = this.buildFormater($col, col, p);
-
-    //     if ($col.type === Columntype.string) {
-    //         return (item: any) => {
-    //             return formater(item);
-    //         };
-    //     } else if ($col.type === Columntype.text) {
-    //         return (item: any) => {
-    //             return formater(item);
-    //         };
-    //     } else if ($col.type === Columntype.integer) {
-    //         return (item: any) => {
-    //             return formater(item);
-    //         };
-    //     } else if ($col.type === Columntype.float) {
-    //         return (item: any) => {
-    //             return formater(item);
-    //         };
-    //     } else if ($col.type === Columntype.boolean) {
-    //         return (item: any) => {
-    //             return formater(item);
-    //         };
-    //     } else if ($col.type === Columntype.date) {
-    //         return (item: any) => {
-    //             return formater(item);
-    //         };
-    //     } else if ($col.type === Columntype.action) {
-    //         let actions: IColumnAction[] = $col.options;
-
-    //         return (item: any) => {
-    //             return actions.map((a, i) => {
-    //                 let uri = (item: any) => {
-    //                     if (a.urlFactory) return a.urlFactory(item);
-    //                     return a.url || '';
-    //                 }
-    //                 return <a href={uri(item)} action-confirm="delete ?" >
-    //                     {a.icon
-    //                         ? <span className="icon"><i className={`fa fa-${a.icon}`} key={i} /></span>
-    //                         : null
-    //                     }
-    //                 </a>
-    //             })
-
-    //         };
-    //     } else if ($col.type === Columntype.link) {
-    //         let $action: IColumnLink = $col.options;
-    //         let uri = (item: any) => {
-    //             if ($action.urlFactory) return $action.urlFactory(item);
-    //             return $action.url || '';
-    //         }
-    //         return (item: any) => {
-    //             return <a href={uri(item)} >{formater(item)}</a>
-    //         };
-    //     }
-
-    //     return col.render = () => 'not supported render'
-    // }

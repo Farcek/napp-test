@@ -1,8 +1,15 @@
+
 import { BaseColumn } from "./base";
 
-export class StringColumnRenderer extends BaseColumn {
+export class TextColumnRenderer extends BaseColumn {
+
+
 
     render(row: any, state: any) {
+
+        
+        
+
         return (row && row[this.propery.propertyname]) || ''
     }
 }

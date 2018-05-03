@@ -4,6 +4,7 @@ import { Property } from "../metadata";
 import React from "react";
 
 import { column, list } from "../list-common";
+import { TestColumn } from "./custom.column";
 
 
 
@@ -30,6 +31,11 @@ export class ListMeta {
         { icon: 'list', uri: '/sp' },
     )
     delete: string
+
+    @Property() @column.custom({
+        renderclass: TestColumn
+    })
+    haha: any
 }
 
 

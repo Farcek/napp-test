@@ -1,10 +1,8 @@
-import { IColumnRenderer, IColumn } from "../column.interface";
 import { BaseColumn } from "./base";
 import { ILinkColumn } from "../../list-common";
 import React from "react";
 
-export class LinkColumnRenderer extends BaseColumn implements IColumnRenderer {
-
+export class LinkColumnRenderer extends BaseColumn  {
 
 
     render(row: any, state: any) {

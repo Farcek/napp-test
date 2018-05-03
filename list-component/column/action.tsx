@@ -1,20 +1,18 @@
-import { IColumnRenderer, IColumn } from "../column.interface";
+
 import { BaseColumn } from "./base";
 import { IActionColumnOptions } from "../../list-common";
 import React from "react";
 
-export class ActionColumnRenderer extends BaseColumn implements IColumnRenderer {
+export class ActionColumnRenderer extends BaseColumn {
 
 
 
     render(row: any, state: any) {
 
-
         let actionmeta: IActionColumnOptions = this.options
 
-        
         if (actionmeta && Array.isArray(actionmeta.actions)) {
-            return actionmeta.actions.map((m,i) => {
+            return actionmeta.actions.map((m, i) => {
                 let uri = '';
                 if (typeof m.uri === 'string') {
                     uri = m.uri;
