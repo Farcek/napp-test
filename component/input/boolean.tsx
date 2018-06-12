@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import { IPropertiesError } from '../../common';
 import { INappInput } from "./interface";
 export interface INappInputBoolean extends INappInput {
 

@@ -6,5 +6,6 @@ export enum Inputtype {
     float,
 
     boolean,
-    date
+    date,
+    select
 }

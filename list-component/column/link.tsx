@@ -1,6 +1,6 @@
 import { BaseColumn } from "./base";
-import { ILinkColumn } from "../../list-common";
-import React from "react";
+import { ILinkColumn } from "@napp-list";
+import * as React from "react";
 
 export class LinkColumnRenderer extends BaseColumn  {
 

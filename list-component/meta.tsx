@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Classtype } from "../common";
-import { PNappTableAction, PNappTableQuery, PNappTableColumn, NappTable } from "../component/table";
-import { ClassMeta } from "../metadata";
-import { $listactionKey, IListActions, $listfilterKey, IFilterOption, IPagingOption, $listpagingKey } from "../list-common";
-import { PNappPaginationProps } from "../component/pagination";
+import { Classtype } from "@napp-common";
+import { PNappTableAction, PNappTableQuery, PNappTableColumn, NappTable } from "@napp-component/table";
+import { ClassMeta } from "@napp-meta";
+import { $listactionKey, IListActions, $listfilterKey, IFilterOption, IPagingOption, $listpagingKey } from "@napp-list";
+import { PNappPaginationProps } from "@napp-component/pagination";
 import { columnFactory } from "./column.factory";
 const PropTypes = require('prop-types');
 

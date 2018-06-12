@@ -5,6 +5,7 @@ import { IntegerInput } from "./input.integer";
 import { FloatInput } from "./input.float";
 import { BooleanInput } from "./input.boolean";
 import { DateInput } from "./input.date";
+import { SelectInput } from "./input.select";
 import { CustomInput } from "./input.custom";
 
 export const input = {
@@ -15,5 +16,6 @@ export const input = {
     float: FloatInput,
     bool: BooleanInput,
     date: DateInput,
-    custom: CustomInput
+    select: SelectInput,
+    custom: CustomInput,
 }

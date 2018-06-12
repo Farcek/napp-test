@@ -1,7 +1,7 @@
 
 import { BaseInputRenderer } from "./base";
 import { NappInputString } from "../../component/input";
-import React from "react";
+import * as React from "react";
 import { PropertyMeta } from "../../metadata";
 
 export class NotsuportInput extends BaseInputRenderer {

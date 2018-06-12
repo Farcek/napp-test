@@ -1,22 +1,34 @@
-import { Classtype } from "../common";
-import React from "react";
-import { AppLayBase } from "./lay.base";
-import { NappMetaform } from "../form-component/form";
+import { Classtype } from "@napp-common";
+import * as React from "react";
 
 
-export class FormView<T extends Object> {
+import { NappMetaform } from "@napp-form-component";
+import { NappContainer } from "./container";
+
+
+export interface PFormView<D, S> {
+    dto: D
+    state?: S
+
+    errors? : any
+}
+export class FormView<T, S> {
 
     public classtype: Classtype
-    constructor(public dto: T) {
-        this.classtype = dto.constructor as Classtype;
+    public dto: T
+    state?: S;
+    errors?: any;
+
+    constructor(params: PFormView<T, S>) {
+        this.dto = params.dto
+        this.classtype = params.dto.constructor as Classtype
+        this.state = params.state
+        this.errors = params.errors;
     }
 
-    state = {};
-
-
     render() {
-        return <AppLayBase>
-            <NappMetaform $class={this.classtype} $dto={this.dto} $error={{}} $state={this.state} />
-        </AppLayBase>
+        return <NappContainer>
+            <NappMetaform $class={this.classtype} $dto={this.dto} $error={this.errors} $state={this.state} />
+        </NappContainer>
     }
 }

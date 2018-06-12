@@ -1,7 +1,7 @@
 
 import { BaseInputRenderer } from "./base";
 import { NappInputString, INappInputStringProps } from "../../component/input";
-import React from "react";
+import * as React from "react";
 
 
 export class StringInputRenderer extends BaseInputRenderer {
@@ -13,8 +13,7 @@ export class StringInputRenderer extends BaseInputRenderer {
             $value: dto && dto[this.propertyname] || '',
             $name: this.propertyname,
             $label: this.label,
-
-
+            $error : this.errors
         }
         return <NappInputString {...$options} />
     }

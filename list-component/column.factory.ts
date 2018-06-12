@@ -1,10 +1,12 @@
-import { PropertyMeta } from "../metadata";
+import { PropertyMeta } from "@napp-meta";
 
-import { Columnformatmeta, $columnformatmetaKey, $columnmetaKey, Columnmeta, Columntype, IColumnRenderer } from "../list-common";
-import { Classtype } from "../common";
+import { Columnformatmeta, $columnformatmetaKey, $columnmetaKey, Columnmeta, Columntype, IColumnRenderer } from "@napp-list";
+import { Classtype } from "@napp-common";
 import { StringColumnRenderer } from "./column/string";
 import { ActionColumnRenderer } from "./column/action";
 import { LinkColumnRenderer } from "./column/link";
+import { DateColumnRenderer } from "./column/date";
+import { BooleanColumnRenderer } from "./column/bool";
 
 
 function buildFormater(propery: PropertyMeta) {
@@ -30,6 +32,10 @@ function columnclassFromColumntype(coltype: Columntype): Classtype {
 
     if (coltype === Columntype.string) {
         return StringColumnRenderer;
+    } else if (coltype === Columntype.date) {
+        return DateColumnRenderer;
+    } else if (coltype === Columntype.boolean) {
+        return BooleanColumnRenderer;
     } else if (coltype === Columntype.action) {
         return ActionColumnRenderer;
     } else if (coltype === Columntype.link) {

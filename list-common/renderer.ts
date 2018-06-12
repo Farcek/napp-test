@@ -1,4 +1,4 @@
-import { PropertyMeta } from "../metadata";
+import { PropertyMeta } from "@napp-meta";
 
 
 export interface IColumnRenderer {

@@ -1,5 +1,5 @@
-import { IProperty } from "../metadata";
-import { Columnmeta } from "../list-common";
+import { IProperty } from "@napp-meta";
+import { Columnmeta } from "@napp-list";
 
 
 export interface IColumn {

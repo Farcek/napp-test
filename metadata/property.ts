@@ -1,5 +1,4 @@
-import { ClassMeta } from "./classmetadata";
-import { Classtype } from "../common";
+import { Classtype } from "@napp-common";
 
 export interface IProperty {
     name?: string

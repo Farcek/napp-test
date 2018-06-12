@@ -1,10 +1,10 @@
-import { ClassMeta } from "../metadata";
-import { Classtype } from "../common";
+import { ClassMeta } from "@napp-meta";
+import { Classtype } from "@napp-common";
 import { Columnmeta, $columnmetaKey } from "./column.meta";
 
 export interface ICustomColumn {
     renderclass: Classtype
-    options?: string
+    options?: any
 }
 export function CustomColumn(option: ICustomColumn) {
     return (target: Object, property: string) => {

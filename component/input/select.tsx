@@ -1,12 +1,11 @@
 import * as React from "react";
 import { INappInput, INappInputIcon } from "./interface";
+import { KeyValueCollection } from "@napp-common";
 
-export interface NappInputSelectOption {
-    value: any, label: string
-}
+
 export interface NappInputSelectProps extends INappInput, INappInputIcon {
 
-    $values: NappInputSelectOption[]
+    $values: KeyValueCollection
     $value: any
 }
 
@@ -60,9 +59,9 @@ export class NappInputSelect extends React.Component<NappInputSelectProps, {}> {
                             ? <option hidden>{this.props.$placeholder}</option>
                             : null
                         }
-                        <option  value="">-- Сонго --</option>
-                        {this.props.$values.map((it, i) => {
-                            return <option key={i} value={it.value} selected={this.props.$value == it.value}>{it.label}</option>
+                        <option value="">-- Сонго --</option>
+                        {this.props.$values && this.props.$values.map((it, i) => {
+                            return <option key={i} value={it.key} selected={this.props.$value == it.key}>{it.value}</option>
                         })}
 
                     </select>

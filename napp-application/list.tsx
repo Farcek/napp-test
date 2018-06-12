@@ -1,7 +1,9 @@
-import { Classtype } from "../common";
-import React from "react";
-import { AppLayBase } from "./lay.base";
-import { NappListview, NappListviewState } from "../list-component";
+import { Classtype } from "@napp-common";
+import * as  React from "react";
+import { NappListview, NappListviewState } from "@napp-list-component";
+import { AppContext } from "./context";
+import { NappLayout } from "./layout";
+import { NappContainer } from "./container";
 
 export class ListView<T> {
     constructor(public classtype: Classtype) {
@@ -30,9 +32,10 @@ export class ListView<T> {
         return this;
     }
 
+
     render() {
-        return <AppLayBase>
+        return <NappContainer>
             <NappListview $class={this.classtype} $state={this.state} $dtoItems={this.items} />
-        </AppLayBase>
+        </NappContainer>
     }
 }

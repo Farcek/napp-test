@@ -1,5 +1,5 @@
 import * as React from "react";
-// import * as moment from "moment";
+import * as moment from "moment";
 import { INappInput, INappInputIcon } from "./interface";
 export interface INappInputDateProps extends INappInput, INappInputIcon {
     $value: Date | null
@@ -46,8 +46,7 @@ export class NappInputDate extends React.Component<INappInputDateProps, {}> {
 
     render() {
         let icon = this.props.Icon || false;
-        // let val: string = this.props.Value ? moment(this.props.Value).format('YYYY-MM-DDTHH:mm') : '';
-        let val ='todo'
+        let val: string = this.props.$value ? moment(this.props.$value).format('YYYY-MM-DDTHH:mm') : '';        
 
         return <div className="field">
             <label className="label">{this.props.$label} </label>

@@ -1,9 +1,10 @@
 import * as React from "react";
-import { Classtype, IPropertiesError } from "../common";
-import { ClassMeta } from "../metadata";
-import { NappForm } from "../component/form";
-import { $FormMetakey, IForm } from "../form-common";
+import { Classtype, IPropertiesError } from "@napp-common";
+import { ClassMeta } from "@napp-meta";
+import { NappForm } from "@napp-component";
+import { $FormMetakey, IForm } from "@napp-form";
 import { NappMetaformInputs } from "./group";
+import { FormContext } from "./context";
 const PropTypes = require('prop-types');
 
 // import { IFormError } from "../interface";
@@ -25,18 +26,7 @@ export interface INappMetaformProps {
 }
 
 export class NappMetaform extends React.Component<INappMetaformProps, {}> {
-    getChildContext() {
-        return {
-            frmError: this.props.$error,
-            frmDto: this.props.$dto,
-            frmState: this.props.$state
-        };
-    }
-    static childContextTypes = {
-        frmError: PropTypes.object,
-        frmDto: PropTypes.object,
-        frmState: PropTypes.object
-    }
+
 
     actionCancel($from: IForm, $state: any) {
         if ($from && $from.cancel) {
@@ -68,22 +58,19 @@ export class NappMetaform extends React.Component<INappMetaformProps, {}> {
         let { $class, $error, $dto, $state } = this.props;
         let $meta = ClassMeta.Factory($class);
 
-        let $from: IForm = $meta.getMeta($FormMetakey) || {};
-        let submit = () => {
-            if ($from) {
 
-            }
-            return ''
-        }
+
+        let $from: IForm = $meta.getMeta($FormMetakey) || {};
         let Layout = $from.layout;
+
+
 
         return <NappForm $error={$error} $method={$from.method}
             $cancel={this.actionCancel($from, $state)}
             $submit={this.actionSubmit($from, $state)} >
             {Layout
-                ? <Layout />
+                ? <FormContext.Provider value={{ $class, $dto, $state, $error }}> <Layout /></FormContext.Provider>
                 : <NappMetaformInputs $class={$class} $dto={$dto} $state={$state} $error={$error} $group="*" />
-
             }
         </NappForm>;
     }

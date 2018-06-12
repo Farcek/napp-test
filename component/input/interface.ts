@@ -1,4 +1,4 @@
-import { IPropertiesError } from '../../common';
+import { IPropertiesError } from '@napp-common';
 export interface INappInput {
     $name: string
     $label: string

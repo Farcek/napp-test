@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IPropertiesError } from "../common";
+import { IPropertiesError } from "@napp-common";
 
 
 export interface INappFormProps {

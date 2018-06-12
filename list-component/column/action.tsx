@@ -1,7 +1,7 @@
 
 import { BaseColumn } from "./base";
-import { IActionColumnOptions } from "../../list-common";
-import React from "react";
+import { IActionColumnOptions } from "@napp-list";
+import * as React from "react";
 
 export class ActionColumnRenderer extends BaseColumn {
 

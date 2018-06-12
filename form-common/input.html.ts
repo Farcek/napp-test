@@ -1,5 +1,4 @@
-import { ClassMeta } from "../metadata";
-import { Classtype } from "../common";
+import { ClassMeta } from "@napp-meta";
 import { $inputmetaKey, Inputmeta } from "./input.meta";
 import { Inputtype } from "./inputtype";
 

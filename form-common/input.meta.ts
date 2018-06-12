@@ -1,5 +1,5 @@
 import { Inputtype } from "./inputtype";
-import { Classtype } from "../common";
+import { Classtype } from "@napp-common";
 
 export const $inputmetaKey = 'input:meta';
 export interface Inputmeta {

@@ -1,5 +1,4 @@
-import { ClassMeta } from "../metadata";
-import { Classtype } from "../common";
+import { ClassMeta } from "@napp-meta";
 import { Columnmeta, $columnmetaKey } from "./column.meta";
 import { Columntype } from "./column.type";
 
@@ -8,7 +7,7 @@ import { Columntype } from "./column.type";
 
 
 export interface IDateColumn {
-
+    format?: string
 }
 export function DateColumn(option?: IDateColumn) {
     return (target: Object, property: string) => {

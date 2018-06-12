@@ -1,5 +1,6 @@
-import { IColumnRenderer, IColumn } from "../column.interface";
-import { PropertyMeta } from "../../metadata";
+
+import { PropertyMeta } from "@napp-meta";
+import { IColumnRenderer } from "@napp-list";
 
 export abstract class BaseColumn implements IColumnRenderer {
 

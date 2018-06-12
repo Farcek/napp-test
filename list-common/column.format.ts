@@ -1,4 +1,4 @@
-import { ClassMeta } from "../metadata";
+import { ClassMeta } from "@napp-meta";
 
 export const $columnformatmetaKey = 'column:format:meta';
 

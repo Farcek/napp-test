@@ -1,7 +1,7 @@
 
 import { BaseInputRenderer } from "./base";
 import { NappInputNumber, INappInputNumberProps } from "../../component/input";
-import React from "react";
+import * as React from "react";
 
 
 export class IntegerInputRenderer extends BaseInputRenderer {
@@ -13,7 +13,7 @@ export class IntegerInputRenderer extends BaseInputRenderer {
             $value: dto && dto[this.propertyname] || '',
             $name: this.propertyname,
             $label: this.label,
-
+            $error : this.errors,
             $step: 1
 
         }

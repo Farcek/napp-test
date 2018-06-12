@@ -1,7 +1,7 @@
 
 import { BaseInputRenderer } from "./base";
 import { NappInputNumber, INappInputNumberProps } from "../../component/input";
-import React from "react";
+import * as React from "react";
 
 
 export class FloatInputRenderer extends BaseInputRenderer {
@@ -13,7 +13,7 @@ export class FloatInputRenderer extends BaseInputRenderer {
             $value: dto && dto[this.propertyname] || '',
             $name: this.propertyname,
             $label: this.label,
-
+            $error : this.errors,
             $step: 0.1
 
         }

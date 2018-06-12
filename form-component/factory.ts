@@ -1,7 +1,7 @@
-import { Classtype } from "../common";
-import { PropertyMeta } from "../metadata";
+import { Classtype } from "@napp-common";
+import { PropertyMeta } from "@napp-meta";
 
-import { $inputmetaKey, Inputmeta, Inputtype, InputRenderer } from "../form-common";
+import { $inputmetaKey, Inputmeta, Inputtype, InputRenderer } from "@napp-form";
 import { NotsuportInput } from "./input/not";
 import { StringInputRenderer } from "./input/string";
 import { FloatInputRenderer } from "./input/float";
@@ -10,6 +10,7 @@ import { HtmlInputRenderer } from "./input/html";
 import { IntegerInputRenderer } from "./input/integer";
 import { BooleanInputRenderer } from "./input/boolean";
 import { DateInputRenderer } from "./input/date";
+import { SelectInputRenderer } from "./input/select";
 
 
 function factoryInputFromClass(inputclass: Classtype, propery: PropertyMeta, options?: any): InputRenderer {
@@ -45,6 +46,9 @@ function factoryInputFromInputtype(inputtype: Inputtype, propery: PropertyMeta, 
     }
     if (inputtype === Inputtype.date) {
         return factoryInputFromClass(DateInputRenderer, propery, options);
+    }
+    if (inputtype === Inputtype.select) {
+        return factoryInputFromClass(SelectInputRenderer, propery, options);
     }
 
     return new NotsuportInput(propery, options);
