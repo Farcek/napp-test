@@ -1,16 +1,15 @@
 import * as React from "react";
 import { INappInput, INappInputIcon } from "./interface";
 export interface INappInputNumberProps extends INappInput, INappInputIcon {
-    $value?: number
+    $value?: number;
 
-    $step?: number
+    $step?: number;
 }
 
 export class NappInputNumber extends React.Component<INappInputNumberProps, {}> {
 
     get controlClass() {
-        //className="control has-icons-left has-icons-right"
-        return `control ${this.props.Icon ? 'has-icons-left' : ''} ${(this.isError || this.isSuccess) ? 'has-icons-right' : ''}`
+        return `control ${this.props.Icon ? 'has-icons-left' : ''} ${(this.isError || this.isSuccess) ? 'has-icons-right' : ''}`;
     }
 
     get inputClass() {

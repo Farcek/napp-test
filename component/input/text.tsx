@@ -58,7 +58,7 @@ export class NappInputText extends React.Component<INappInputTextProps, {}> {
                     : null
                 }
                 {this.isError
-                    ? <span className="icon is-small is-right has-text-danger" ><i className="fa fa-exclamation-triangle"></i></span>
+                    ? <span className="icon is-small is-right has-text-danger" ><i className="fa fa-exclamation-triangle" /></span>
                     : null
                 }
                 {this.isSuccess
