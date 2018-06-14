@@ -1,23 +1,23 @@
-import { IPropertiesError } from '@napp-common';
+import { IPropertiesError } from "@napp-common";
 export interface INappInput {
-    $name: string
-    $label: string
+    $name: string;
+    $label: string;
 
-    $value?: any
+    $value?: any;
 
-    $placeholder?: string
+    $placeholder?: string;
 
-    $distabled?: boolean
-    $readonly?: boolean
+    $distabled?: boolean;
+    $readonly?: boolean;
 
-    $error?: IPropertiesError
+    $error?: IPropertiesError;
 
 }
 
 export interface INappInputIcon {
-    Icon?: string
+    Icon?: string;
 }
 
 export interface INappInputCustom<T> {
-    options?: T
+    options?: T;
 }

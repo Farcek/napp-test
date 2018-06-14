@@ -1,49 +1,49 @@
 import * as React from "react";
 import { INappInput, INappInputIcon } from "./interface";
 export interface INappInputStringProps extends INappInput, INappInputIcon {
-    $value: string
+    $value: string;
 }
 
 export class NappInputString extends React.Component<INappInputStringProps, {}> {
 
     get controlClass() {
-        //className="control has-icons-left has-icons-right"
-        return `control ${this.props.Icon ? 'has-icons-left' : ''} ${(this.isError || this.isSuccess) ? 'has-icons-right' : ''}`
+        // className="control has-icons-left has-icons-right"
+        return `control ${this.props.Icon ? "has-icons-left" : ""} ${(this.isError || this.isSuccess) ? "has-icons-right" : ""}`;
     }
 
     get inputClass() {
         if (this.isError) {
-            return "input is-danger"
+            return "input is-danger";
         } else if (this.isSuccess) {
-            return "input is-success"
+            return "input is-success";
         }
-        return "input"
+        return "input";
     }
 
     get isError() {
-        return this.props.$error && this.props.$error.properties && this.props.$name in this.props.$error.properties && this.props.$error.properties[this.props.$name].length > 0
+        return this.props.$error && this.props.$error.properties && this.props.$name in this.props.$error.properties && this.props.$error.properties[this.props.$name].length > 0;
     }
     get isSuccess() {
         if (this.props.$error && this.props.$error.properties) {
             if (this.props.$name in this.props.$error.properties) {
-                return this.props.$error.properties[this.props.$name].length < 1
+                return this.props.$error.properties[this.props.$name].length < 1;
             }
-            return true
+            return true;
         }
-        return false
+        return false;
     }
 
-    showError() {
+    public showError() {
         if (this.props.$error && this.props.$error.properties && this.props.$name in this.props.$error.properties) {
             let errors = this.props.$error.properties[this.props.$name];
-            return errors.map(err => {
-                return <div className="help is-danger">{err}</div>
-            })
+            return errors.map((err) => {
+                return <div className="help is-danger">{err}</div>;
+            });
         }
         return null;
     }
 
-    render() {
+    public render() {
         let icon = this.props.Icon || false;
 
         return <div className="field">
@@ -65,7 +65,6 @@ export class NappInputString extends React.Component<INappInputStringProps, {}> 
             </div>
             {this.showError()}
             {this.props.children}
-        </div>
+        </div>;
     }
 }
-

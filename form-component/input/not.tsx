@@ -1,8 +1,6 @@
-
 import { BaseInputRenderer } from "./base";
-import { NappInputString } from "../../component/input";
 import * as React from "react";
-import { PropertyMeta } from "../../metadata";
+import { PropertyMeta } from "@napp-meta";
 
 export class NotsuportInput extends BaseInputRenderer {
 
@@ -10,13 +8,11 @@ export class NotsuportInput extends BaseInputRenderer {
         propery: PropertyMeta,
         options?: any,
     ) {
-        super();
-        this.propery = propery;
+        super(propery);
         this.options = options;
     }
 
-    render(dto: any, state: any) {
-
-        return <div >Not suported inout</div>
+    public render(dto: any, state: any) {
+        return <div >Not suported inout</div>;
     }
 }

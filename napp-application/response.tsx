@@ -1,31 +1,28 @@
 import { IFilterParam, IResponseFilter } from "classrouter";
 import * as React from "react";
-import * as ReactDOMServer from 'react-dom/server';
+import * as ReactDOMServer from "react-dom/server";
 import { ListView } from "./list";
 import { FormView } from "./form";
 
 import { AppContext, IAppContext } from "./context";
 
-const PropTypes = require('prop-types');
-
-
 export class NappResponseFilter implements IResponseFilter {
     constructor(private appContext: IAppContext) {
 
     }
-    async filter(param: IFilterParam) {
+    public async filter(param: IFilterParam) {
         let { actionResult, expressRes, expressReq } = param;
 
         if (React.isValidElement(actionResult)) {
-            ReactResponse(actionResult, expressRes, expressReq, this.appContext)
+            ReactResponse(actionResult, expressRes, expressReq, this.appContext);
             param.handled = true;
         } else if (actionResult instanceof ListView) {
             let r = actionResult.render();
-            ReactResponse(r, expressRes, expressReq, this.appContext)
+            ReactResponse(r, expressRes, expressReq, this.appContext);
             param.handled = true;
         } else if (actionResult instanceof FormView) {
             let r = actionResult.render();
-            ReactResponse(r, expressRes, expressReq, this.appContext)
+            ReactResponse(r, expressRes, expressReq, this.appContext);
             param.handled = true;
         }
     }
@@ -37,7 +34,7 @@ Developed by farcek. 2018
 -->
 `;
 export async function ReactResponse(result: any, res: any, req: any, appContext: IAppContext) {
-    res.write('<!DOCTYPE html>' + tamga);
+    res.write("<!DOCTYPE html>" + tamga);
     ReactDOMServer
         .renderToStaticNodeStream(<AppContext.Provider value={appContext}>{result}</AppContext.Provider>)
         .pipe(res);

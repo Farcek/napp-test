@@ -12,7 +12,6 @@ import { BooleanInputRenderer } from "./input/boolean";
 import { DateInputRenderer } from "./input/date";
 import { SelectInputRenderer } from "./input/select";
 
-
 function factoryInputFromClass(inputclass: Classtype, propery: PropertyMeta, options?: any): InputRenderer {
 
     if (inputclass) {
@@ -57,32 +56,32 @@ function factoryInputFromInputtype(inputtype: Inputtype, propery: PropertyMeta, 
 function factoryMeta(propery: PropertyMeta): Inputmeta | null {
 
     let meta = propery.getMeta<Inputmeta>($inputmetaKey);
-    if (meta) return meta;
-
-
+    if (meta) {
+        return meta;
+    }
 
     if (propery.reftype === String) {
         return {
             inputtype: Inputtype.string
-        }
+        };
     }
 
     if (propery.reftype === Number) {
         return {
             inputtype: Inputtype.float
-        }
+        };
     }
 
     if (propery.reftype === Date) {
         return {
             inputtype: Inputtype.date
-        }
+        };
     }
 
     if (propery.reftype === Boolean) {
         return {
             inputtype: Inputtype.boolean
-        }
+        };
     }
 
     return null;
@@ -94,14 +93,13 @@ export function factoryInput(propery: PropertyMeta): InputRenderer {
 
     if (meta) {
         if (meta.inputclass) {
-            return factoryInputFromClass(meta.inputclass, propery, meta.options)
+            return factoryInputFromClass(meta.inputclass, propery, meta.options);
         }
 
         if (meta.inputtype) {
-            return factoryInputFromInputtype(meta.inputtype, propery, meta.options)
+            return factoryInputFromInputtype(meta.inputtype, propery, meta.options);
         }
     }
-
 
     return new NotsuportInput(propery, meta && meta.options);
 }

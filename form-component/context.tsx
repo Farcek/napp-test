@@ -2,11 +2,11 @@ import * as React from "react";
 import { Classtype, IPropertiesError } from "@napp-common";
 
 export interface IFormContext {
-    $class: Classtype
-    $dto: any
+    $class: Classtype;
+    $dto: any;
 
-    $state?: any
-    $error?: IPropertiesError
+    $state?: any;
+    $error?: IPropertiesError;
 
 }
 

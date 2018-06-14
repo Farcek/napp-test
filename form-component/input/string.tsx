@@ -1,20 +1,18 @@
-
 import { BaseInputRenderer } from "./base";
-import { NappInputString, INappInputStringProps } from "../../component/input";
+import { NappInputString, INappInputStringProps } from "@napp-component/input";
 import * as React from "react";
-
 
 export class StringInputRenderer extends BaseInputRenderer {
 
-    
-    render(dto: any, state: any) {
+    public render(dto: any, state: any) {
 
         let $options: INappInputStringProps = {
-            $value: dto && dto[this.propertyname] || '',
+            $value: dto && dto[this.propertyname] || "",
             $name: this.propertyname,
             $label: this.label,
-            $error : this.errors
-        }
-        return <NappInputString {...$options} />
+            $error: this.errors
+        };
+
+        return <NappInputString {...$options} />;
     }
 }

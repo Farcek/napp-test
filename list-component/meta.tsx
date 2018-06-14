@@ -1,27 +1,24 @@
 import * as React from "react";
 import { Classtype } from "@napp-common";
 import { PNappTableAction, PNappTableQuery, PNappTableColumn, NappTable } from "@napp-component/table";
+import { PNappPaginationProps } from "@napp-component/pagination";
+
 import { ClassMeta } from "@napp-meta";
 import { $listactionKey, IListActions, $listfilterKey, IFilterOption, IPagingOption, $listpagingKey } from "@napp-list";
-import { PNappPaginationProps } from "@napp-component/pagination";
 import { columnFactory } from "./column.factory";
-const PropTypes = require('prop-types');
 
 export interface INappListviewProps {
-    $class: Classtype
-    $state: NappListviewState
-    $dtoItems: any[]
+    $class: Classtype;
+    $state: NappListviewState;
+    $dtoItems: any[];
 }
 
 export class NappListview extends React.Component<INappListviewProps, {}> {
 
-
-    buildPaging($Classtype: Classtype, state: NappListviewState): PNappPaginationProps {
+    public buildPaging($Classtype: Classtype, state: NappListviewState): PNappPaginationProps {
         let classmeta = ClassMeta.Factory($Classtype);
 
         let $paging: IPagingOption | null = classmeta.getMeta($listpagingKey);
-
-
 
         return {
             limit: (state && state.limit) || ($paging && $paging.limit) || 0,
@@ -29,28 +26,26 @@ export class NappListview extends React.Component<INappListviewProps, {}> {
             page: state && state.page,
             uri: (page: number, limit: number) => {
 
-                if ($paging && typeof $paging.uri === 'string') {
-                    return `${$paging.uri}?page=${page}&limit=${limit}&q=${state.query ? state.query : ''}`
+                if ($paging && typeof $paging.uri === "string") {
+                    return `${$paging.uri}?page=${page}&limit=${limit}&q=${state.query ? state.query : ""}`;
                 }
-                if ($paging && typeof $paging.uri === 'function') {
+                if ($paging && typeof $paging.uri === "function") {
                     return $paging.uri(state, page, limit);
                 }
-                return `?page=${page}&limit=${limit}&q=${state.query ? state.query : ''}`
+                return `?page=${page}&limit=${limit}&q=${state.query ? state.query : ""}`;
             },
             total: state && state.total
-        }
+        };
     }
-
 
     private buildColumns($Classtype: Classtype, state: NappListviewState): PNappTableColumn<any>[] {
         let classmeta = ClassMeta.Factory($Classtype);
 
         let columns = classmeta.getProporties()
             .map(($col) => {
-
                 let renderer = columnFactory($col);
 
-                let col: PNappTableColumn<any> = {}
+                let col: PNappTableColumn<any> = {};
 
                 col.title = $col.name || $col.propertyname;
                 // col.align = $col.align;
@@ -58,35 +53,25 @@ export class NappListview extends React.Component<INappListviewProps, {}> {
 
                 col.render = (row: any, i, arr) => {
                     return renderer.render(row, state);
-                }
-                //this.buildColumnRender($meta, col, $col, p);
+                };
+                // this.buildColumnRender($meta, col, $col, p);
                 return col;
-            })
-
+            });
 
         return columns;
     }
-
-
-
-
 
     private buildFilter($Classtype: Classtype, state: NappListviewState): PNappTableQuery | undefined {
 
         let classmeta = ClassMeta.Factory($Classtype);
 
-        let filterMeta: IFilterOption = classmeta.getMeta($listfilterKey)
-
-
-
-
-
-
+        let filterMeta: IFilterOption = classmeta.getMeta($listfilterKey);
 
         if (filterMeta) {
             let filter: PNappTableQuery = {
                 qvalue: state && state.query
-            }
+            };
+
             if (filterMeta && filterMeta.fieldname) {
                 filter.qname = filterMeta.fieldname;
             }
@@ -95,10 +80,10 @@ export class NappListview extends React.Component<INappListviewProps, {}> {
             }
             if (filterMeta && filterMeta.uri) {
 
-                if (typeof (filterMeta.uri) === 'string') {
-                    filter.qurl = filterMeta.uri
-                } else if (typeof (filterMeta.uri) === 'function') {
-                    filter.qurl = filterMeta.uri(state)
+                if (typeof (filterMeta.uri) === "string") {
+                    filter.qurl = filterMeta.uri;
+                } else if (typeof (filterMeta.uri) === "function") {
+                    filter.qurl = filterMeta.uri(state);
                 }
             }
             return filter;
@@ -109,42 +94,37 @@ export class NappListview extends React.Component<INappListviewProps, {}> {
 
         let classmeta = ClassMeta.Factory($Classtype);
 
-        let listactionMeta: IListActions = classmeta.getMeta($listactionKey)
+        let listactionMeta: IListActions = classmeta.getMeta($listactionKey);
 
         if (listactionMeta && Array.isArray(listactionMeta.actions)) {
 
-            return listactionMeta.actions.map(a => {
+            return listactionMeta.actions.map((a) => {
 
-                let uri = '';
-                if (typeof (a.uri) === 'string') {
+                let uri = "";
+                if (typeof (a.uri) === "string") {
                     uri = a.uri;
-                } else if (typeof (a.uri) === 'function') {
+                } else if (typeof (a.uri) === "function") {
                     uri = a.uri(state);
                 }
 
                 let meta: PNappTableAction = {
-                    label: a.label || '',
+                    label: a.label || "",
                     icon: a.icon,
                     url: uri
                 };
 
                 return meta;
-            })
-
-
+            });
         }
 
-        return []
-
-
+        return [];
     }
 
-    render() {
+    public render() {
         let props = this.props;
         let $state = this.props.$state;
 
         let $Classtype = props.$class;
-
 
         let columns = this.buildColumns($Classtype, $state);
         let filter = this.buildFilter($Classtype, $state);
@@ -152,8 +132,6 @@ export class NappListview extends React.Component<INappListviewProps, {}> {
         let actions = this.buildActions($Classtype, $state);
 
         let paging = this.buildPaging($Classtype, $state);
-
-
 
         // let aa = await new Promise((r) => {
         //     setTimeout(() => {
@@ -167,20 +145,17 @@ export class NappListview extends React.Component<INappListviewProps, {}> {
             query={filter}
             paging={paging}
             actions={actions}
-        />
-
+        />;
 
     }
 }
 
 export class NappListviewState {
-    query?: string
+    public query?: string;
 
-    limit?: number
-    page?: number
-    total?: number
-    paging?: PNappPaginationProps
+    public limit?: number;
+    public page?: number;
+
+    public total?: number;
+    public paging?: PNappPaginationProps;
 }
-
-
-

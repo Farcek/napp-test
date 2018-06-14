@@ -4,9 +4,7 @@ import { IColumnRenderer } from "@napp-list";
 
 export abstract class BaseColumn implements IColumnRenderer {
 
-    abstract render(dto: any, state: any): any;
-    propery: PropertyMeta
-    options?: any
-
-
+    public abstract render(dto: any, state: any): any;
+    public propery?: PropertyMeta;
+    public options?: any;
 }

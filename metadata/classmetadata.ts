@@ -1,61 +1,57 @@
 import { PropertyMeta, IProperty } from "./property";
 
-const $MetaKey = 'desgin:napp:classmeta';
-
-
+const $MetaKey = "desgin:napp:classmeta";
 
 export class ClassMeta {
+    private metas: { [key: string]: any } = {};
 
-    private _metas: { [key: string]: any } = {}
+    private proporties: { [p: string]: PropertyMeta } = {};
 
-
-    private _proporties: { [p: string]: PropertyMeta } = {}
-
-
-
-
-    factoryProperty(propertyname: string, p?: IProperty) {
+    public factoryProperty(propertyname: string, p?: IProperty) {
         let m = new PropertyMeta();
-        if (propertyname in this._proporties) {
-            m = this._proporties[propertyname];
+        if (propertyname in this.proporties) {
+            m = this.proporties[propertyname];
         }
         m.update(p || {});
 
-        return this._proporties[propertyname] = m;
+        return this.proporties[propertyname] = m;
     }
 
-    getProporties() {
+    public getProporties() {
         return Object
-            .keys(this._proporties)
-            .map(p => {
-                return this._proporties[p]
+            .keys(this.proporties)
+            .map((p) => {
+                return this.proporties[p];
             })
             .sort((aa, bb) => {
-                if (aa.order < bb.order)
+                if (aa.order < bb.order) {
                     return -1;
-                if (aa.order > bb.order)
+                }
+
+                if (aa.order > bb.order) {
                     return 1;
+                }
                 return 0;
-            })
+            });
     }
 
-    setMeta(key: string, meta: any) {
-        this._metas[key] = meta;
+    public setMeta(key: string, meta: any) {
+        this.metas[key] = meta;
     }
-    getMeta(key: string) {
-        if (key in this._metas) {
-            return this._metas[key]
+    public getMeta(key: string) {
+        if (key in this.metas) {
+            return this.metas[key];
         }
     }
 
-    factoryMeta(key: string, initmeta: any) {
-        if (key in this._metas) {
-            return this._metas[key]
+    public factoryMeta(key: string, initmeta: any) {
+        if (key in this.metas) {
+            return this.metas[key];
         }
-        return (this._metas[key] = initmeta);
+        return (this.metas[key] = initmeta);
     }
 
-    static Factory(clss: Object) {
+    public static Factory(clss: object) {
         let meta: ClassMeta = Reflect.getMetadata($MetaKey, clss);
         if (meta instanceof ClassMeta) {
             return meta;

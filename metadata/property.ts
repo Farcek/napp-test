@@ -1,48 +1,40 @@
 import { Classtype } from "@napp-common";
 
 export interface IProperty {
-    name?: string
-    description?: string
+    name?: string;
+    description?: string;
 
-    group?: string
+    group?: string;
 
-    order?: number
+    order?: number;
 }
 
 export class PropertyMeta {
-    propertyname: string = ''
+    public propertyname: string = "";
 
-    reftype: Classtype
+    public reftype?: Classtype;
 
-    name: string = ''
-    description: string = ''
-    group: string = ''
-    order: number = 0
+    public name: string = "";
+    public description: string = "";
+    public group: string = "";
+    public order: number = 0;
 
-    private _metas: { [key: string]: any } = {}
+    private metas: { [key: string]: any } = {};
 
-    update(meta: IProperty) {
+    public update(meta: IProperty) {
         this.name = meta.name || this.name;
         this.description = meta.description || this.description;
         this.group = meta.group || this.group;
         this.order = meta.order || this.order;
-
-
-
     }
 
-    setMeta(key: string, meta: any) {
-        this._metas[key] = meta;
+    public setMeta(key: string, meta: any) {
+        this.metas[key] = meta;
     }
-    getMeta<T>(key: string): T | null {
-        if (key in this._metas) {
-            return this._metas[key]
+    public getMeta<T>(key: string): T | null {
+        if (key in this.metas) {
+            return this.metas[key];
         }
-        return null
+        return null;
     }
 }
-
-
-
-
-

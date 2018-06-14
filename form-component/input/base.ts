@@ -1,6 +1,6 @@
-import { PropertyMeta } from "../../metadata";
-import { InputRenderer } from "../../form-common";
-import { IPropertiesError } from "../../common";
+import { PropertyMeta } from "@napp-meta";
+import { InputRenderer } from "@napp-form";
+import { IPropertiesError } from "@napp-common";
 
 export abstract class BaseInputRenderer implements InputRenderer {
 

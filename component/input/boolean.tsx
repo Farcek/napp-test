@@ -3,27 +3,22 @@ import * as React from "react";
 import { INappInput } from "./interface";
 export interface INappInputBoolean extends INappInput {
 
-    $value?: boolean
+    $value?: boolean;
 }
 
 export class NappInputBoolean extends React.Component<INappInputBoolean, {}> {
 
-
-
-
-
-
-    showError() {
+    public showError() {
         if (this.props.$error && this.props.$error.properties && this.props.$name in this.props.$error.properties) {
             let errors = this.props.$error.properties[this.props.$name];
-            return errors.map(err => {
-                return <div className="help is-danger">{err}</div>
-            })
+            return errors.map((err) => {
+                return <div className="help is-danger">{err}</div>;
+            });
         }
         return null;
     }
 
-    render() {
+    public render() {
 
         let val = !!this.props.$value;
 
@@ -36,10 +31,8 @@ export class NappInputBoolean extends React.Component<INappInputBoolean, {}> {
                 <span>{this.props.$label}</span>
             </label>
 
-
             {this.showError()}
             {this.props.children}
-        </div>
+        </div>;
     }
 }
-

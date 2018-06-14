@@ -1,6 +1,6 @@
 import * as React from "react";
 import { BaseInputRenderer } from "./base";
-import { NappInputDate, INappInputDateProps } from "../../component/input";
+import { NappInputDate, INappInputDateProps } from "@napp-component/input";
 
 export class DateInputRenderer extends BaseInputRenderer {
 
@@ -10,7 +10,7 @@ export class DateInputRenderer extends BaseInputRenderer {
             $value: dto && dto[this.propertyname] || "",
             $name: this.propertyname,
             $label: this.label,
-            $error : this.errors,
+            $error: this.errors,
         };
 
         return <NappInputDate {...$options} />;

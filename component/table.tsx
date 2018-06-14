@@ -1,44 +1,44 @@
 import * as React from "react";
 import { NappPagination, PNappPaginationProps } from "./pagination";
 
-
 export interface PNappTableColumn<T> {
-    key?: string
-    title?: string
-    align?: 'center' | 'right'
-    size?: string
-    render?: (row: T, i: number, array: T[]) => React.ReactNode
+    key?: string;
+    title?: string;
+    align?: "center" | "right";
+    size?: string;
+    render?: (row: T, i: number, array: T[]) => React.ReactNode;
 }
 
 export interface PNappTableAction {
-    label: string
-    icon?: string
-    url?: string
-    type?: string
+    label: string;
+    icon?: string;
+    url?: string;
+    type?: string;
 }
 
 export interface PNappTableQuery {
-    qurl?: string
-    qname?: string
-    qvalue?: string
+    qurl?: string;
+    qname?: string;
+    qvalue?: string;
 
-    qplaceholder?: string
+    qplaceholder?: string;
 }
 export interface PNappTable<T> {
-    columns: PNappTableColumn<T>[]
-    items: T[]
+    
+    columns: PNappTableColumn<T>[];
+    items: T[];
 
-    paging?: PNappPaginationProps
+    paging?: PNappPaginationProps;
 
-    actions?: PNappTableAction[]
+    actions?: PNappTableAction[];
 
-    query?: PNappTableQuery
+    query?: PNappTableQuery;
 
 }
 
 export class NappTable<T> extends React.Component<PNappTable<T>, {}> {
 
-    render() {
+    public render() {
         let columns = this.props.columns || [];
         let paging = this.props.paging;
         let items = this.props.items;
@@ -48,14 +48,14 @@ export class NappTable<T> extends React.Component<PNappTable<T>, {}> {
             <div className="level">
                 <div className="level-left">
                     {query
-                        ? <form action={query.qurl || ''} method="get"  >
+                        ? <form action={query.qurl || ""} method="get"  >
                             <div className="field  has-addons">
                                 <p className="control is-expanded">
-                                    <input className="input" type="text" placeholder={query.qplaceholder || 'Гарчигаар хайх ..'} name={query.qname || 'q'} defaultValue={query.qvalue || ''} />
+                                    <input className="input" type="text" placeholder={query.qplaceholder || "Гарчигаар хайх .."} name={query.qname || "q"} defaultValue={query.qvalue || ""} />
                                 </p>
                                 {query.qvalue
                                     ? <p className="control">
-                                        <a type="submit" className="button is-danger" href={query.qurl || '?'}><span className="icon"><i className="fa fa-close" /></span> </a>
+                                        <a type="submit" className="button is-danger" href={query.qurl || "?"}><span className="icon"><i className="fa fa-close" /></span> </a>
                                     </p>
                                     : null
                                 }
@@ -72,14 +72,14 @@ export class NappTable<T> extends React.Component<PNappTable<T>, {}> {
                         <div className="level-item">
                             <div className="buttons is-right">
                                 {actions.map((it, i) => {
-                                    return <a key={i} href={it.url || '#'}
-                                        className={`button ${it.type ? 'is-' + it.type : 'is-success'}`}>
+                                    return <a key={i} href={it.url || "#"}
+                                        className={`button ${it.type ? "is-" + it.type : "is-success"}`}>
                                         {it.icon
                                             ? <span className="icon"><i className={`fa fa-${it.icon}`} /> </span>
                                             : null
                                         }
                                         <span>{it.label}</span>
-                                    </a>
+                                    </a>;
                                 })}
                             </div>
                         </div>
@@ -92,21 +92,24 @@ export class NappTable<T> extends React.Component<PNappTable<T>, {}> {
                     {columns.map((it, i) => {
                         return <th key={`h${i}`} style={it.size ? { width: it.size } : {}}>
                             {it.title || it.key}
-                        </th>
+                        </th>;
                     })}
                 </thead>
                 <tbody>
                     {items.map((row, i, arr) => {
                         return <tr key={`r${i}`}>
                             {columns.map((col, j) => {
-                                let tdClass = `${col.align == 'center' ? 'has-text-centered' : ''} ${col.align == 'right' ? 'has-text-right' : ''}`;
+                                let tdClass = [
+                                    `${col.align === "center" ? "has-text-centered" : ""}`,
+                                    `${col.align === "right" ? "has-text-right" : ""}`
+                                ].join(" ");
                                 return <td key={`c${j}`} className={tdClass}>
-                                    {col.render ? col.render(row, i, arr) : (row as any)[col.key || '']}
-                                </td>
+                                    {col.render ? col.render(row, i, arr) : (row as any)[col.key || ""]}
+                                </td>;
                             })}
-                        </tr>
+                        </tr>;
                     })}
-                    {items.length == 0
+                    {items.length === 0
                         ? <tr><td colSpan={columns.length}>
                             Мэдээлэл алга байна
                     </td></tr>
@@ -130,8 +133,6 @@ export class NappTable<T> extends React.Component<PNappTable<T>, {}> {
                     : null
                 }
             </table>
-        </div>
+        </div>;
     }
 }
-
-

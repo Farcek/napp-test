@@ -1,37 +1,36 @@
 import * as React from "react";
 import { IPropertiesError } from "@napp-common";
 
-
 export interface INappFormProps {
 
-    $method?: string
-    $error?: IPropertiesError
+    $method?: string;
+    $error?: IPropertiesError;
 
     /**
      * submit and list action
      */
-    $submit: string
+    $submit: string;
     /**
      * cancel action
      */
-    $cancel?: string
+    $cancel?: string;
 
 }
 
 export class NappForm extends React.Component<INappFormProps, {}> {
-    showError() {
+    public showError() {
         if (this.props.$error && this.props.$error.message) {
             return <article className="message is-danger">
                 <div className="message-body">
                     {this.props.$error.message}
                 </div>
-            </article>
+            </article>;
         }
-        return null
+        return null;
     }
 
-    render() {
-        return <form action={this.props.$submit || ''} method={this.props.$method || 'post'} encType="application/x-www-form-urlencoded" >
+    public render() {
+        return <form action={this.props.$submit || ""} method={this.props.$method || "post"} encType="application/x-www-form-urlencoded" >
             {this.showError()}
             {this.props.children}
             <div className="field is-grouped is-grouped-centered">
@@ -78,4 +77,3 @@ export class NappForm extends React.Component<INappFormProps, {}> {
         </form >;
     }
 }
-

@@ -1,11 +1,11 @@
 export interface IdValue {
-    id: number
-    value: string
+    id: number;
+    value: string;
 }
 
 export interface idValueObject<T> {
-    key: number
-    value: T
+    key: number;
+    value: T;
 }
 
 export interface IdValueCollection extends Array<IdValue> { }

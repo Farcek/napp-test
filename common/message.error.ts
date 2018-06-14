@@ -1,4 +1,3 @@
 export interface IMessageError {
-    message?: string
+    message?: string;
 }
-

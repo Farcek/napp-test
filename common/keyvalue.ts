@@ -1,11 +1,11 @@
 export interface KeyValue {
-    key: string
-    value: string
+    key: string;
+    value: string;
 }
 
 export interface KeyValueObject<T> {
-    key: string
-    value: T
+    key: string;
+    value: T;
 }
 
 export interface KeyValueCollection extends Array<KeyValue> { }

@@ -18,4 +18,4 @@ export const input = {
     date: DateInput,
     select: SelectInput,
     custom: CustomInput,
-}
+};

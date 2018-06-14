@@ -1,14 +1,14 @@
 import * as React from "react";
 
 export interface PNappPaginationProps {
-    total?: number
-    page?: number
+    total?: number;
+    page?: number;
 
-    limit?: number
+    limit?: number;
 
-    uri?: (page: number, limit: number) => string
+    uri?: (page: number, limit: number) => string;
 
-    maxpage?: number
+    maxpage?: number;
 }
 
 export class NappPagination extends React.Component<PNappPaginationProps, {}> {
@@ -30,24 +30,25 @@ export class NappPagination extends React.Component<PNappPaginationProps, {}> {
     }
 
     get totalPage() {
-        var limit = this.limit;
+        let limit = this.limit;
         return (limit && Math.ceil(this.total / limit)) || 0;
     }
 
     get startPage() {
         let pr = Math.round(this.maxpage / 2);
-        var p = this.page - pr;
+        let p = this.page - pr;
         return p < 0 ? 0 : p;
     }
     get endPage() {
-        var pr = Math.round(this.maxpage / 2), t = this.totalPage;
-        var p = this.page + pr;
+        let pr = Math.round(this.maxpage / 2);
+        let t = this.totalPage;
+        let p = this.page + pr;
         return p > t ? t : p;
     }
 
     get pages() {
-        var r = [];
-        for (var i = this.startPage; i < this.endPage; i++) {
+        let r = [];
+        for (let i = this.startPage; i < this.endPage; i++) {
             r.push(i);
         }
         return r;
@@ -67,18 +68,18 @@ export class NappPagination extends React.Component<PNappPaginationProps, {}> {
     }
 
     get hasNext() {
-        return this.page < this.totalPage - 1
+        return this.page < this.totalPage - 1;
     }
     get hasPrev() {
 
-        return this.page > 0
+        return this.page > 0;
     }
 
     get spy() {
-        return 'total>' + this.total + typeof (this.total) + 'page>' + this.page + typeof (this.page)
+        return "total>" + this.total + typeof (this.total) + "page>" + this.page + typeof (this.page);
     }
 
-    render() {
+    public render() {
 
         let uri = this.props.uri || ((p: number, l: number) => `?page=${p}&limit=${l}`);
         return <nav className="pagination">
@@ -100,9 +101,9 @@ export class NappPagination extends React.Component<PNappPaginationProps, {}> {
                     : null
                 }
 
-                {this.pages.map((p,i) => {
+                {this.pages.map((p, i) => {
                     return <li key={i}>
-                        <a className={`pagination-link ${p == this.page ? 'is-current' : ''}`} href={uri(p, this.limit)}>{p + 1}</a>
+                        <a className={`pagination-link ${p === this.page ? "is-current" : ""}`} href={uri(p, this.limit)}>{p + 1}</a>
                     </li>;
                 })}
                 {this.hasLastRange

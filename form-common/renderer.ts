@@ -1,13 +1,12 @@
 import { PropertyMeta } from "@napp-meta";
 import { IPropertiesError } from "@napp-common";
 
-
 export interface InputRenderer {
-    propery: PropertyMeta
+    propery: PropertyMeta;
 
-    options?: any
-    
-    errors?: IPropertiesError
+    options?: any;
 
-    render(dto: any, state: any): any
+    errors?: IPropertiesError;
+
+    render(dto: any, state: any): any;
 }

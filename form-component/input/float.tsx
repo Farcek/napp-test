@@ -1,6 +1,6 @@
 
 import { BaseInputRenderer } from "./base";
-import { NappInputNumber, INappInputNumberProps } from "../../component/input";
+import { NappInputNumber, INappInputNumberProps } from "@napp-component/input";
 import * as React from "react";
 
 export class FloatInputRenderer extends BaseInputRenderer {

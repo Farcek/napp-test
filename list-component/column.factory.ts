@@ -8,10 +8,9 @@ import { LinkColumnRenderer } from "./column/link";
 import { DateColumnRenderer } from "./column/date";
 import { BooleanColumnRenderer } from "./column/bool";
 
-
 function buildFormater(propery: PropertyMeta) {
     let m = propery.getMeta<Columnformatmeta>($columnformatmetaKey);
-    if (m && typeof m.format === 'function') {
+    if (m && typeof m.format === "function") {
         return m.format;
     }
 
@@ -49,16 +48,16 @@ function factoryClass($col: Columnmeta | null): Classtype {
 
     if ($col) {
         if ($col.columnclass) {
-            return $col.columnclass
+            return $col.columnclass;
         } else if ($col.columntype) {
-            return columnclassFromColumntype($col.columntype)
+            return columnclassFromColumntype($col.columntype);
         }
     }
-    return StringColumnRenderer
+    return StringColumnRenderer;
 }
 
 function factoryMeta(propery: PropertyMeta) {
-    let $col = propery.getMeta<Columnmeta>($columnmetaKey)
+    let $col = propery.getMeta<Columnmeta>($columnmetaKey);
     if ($col) {
         return $col;
     }
@@ -94,10 +93,9 @@ export function columnFactory(propery: PropertyMeta): IColumnRenderer {
 
     let $col = factoryMeta(propery);
 
+    let classType = factoryClass($col);
 
-    let Classtype = factoryClass($col);
-
-    let renderer: IColumnRenderer = new Classtype();
+    let renderer: IColumnRenderer = new classType();
     renderer.propery = propery;
     renderer.options = $col && $col.options;
 
