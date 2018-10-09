@@ -4,7 +4,7 @@ export interface IdValue {
 }
 
 export interface idValueObject<T> {
-    key: number;
+    id: number;
     value: T;
 }
 
