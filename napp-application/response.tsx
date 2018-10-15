@@ -34,6 +34,7 @@ Developed by farcek. 2018
 -->
 `;
 export async function ReactResponse(result: any, res: any, req: any, appContext: IAppContext) {
+    appContext.req = req;
     res.write("<!DOCTYPE html>" + tamga);
     ReactDOMServer
         .renderToStaticNodeStream(<AppContext.Provider value={appContext}>{result}</AppContext.Provider>)
